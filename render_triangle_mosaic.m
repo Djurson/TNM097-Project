@@ -4,7 +4,7 @@ function [outRGB, idxMap] = render_triangle_mosaic(Ilab, paletteLab, side)
 outRGB = zeros(height,width,3);
 idxMap = zeros(height,width);
 
-h  = side*sqrt(3)/2;
+h  = side*(sqrt(3)/2);
 dx = side/2;
 nY = ceil(height/h);
 nX = ceil(width/dx);
@@ -63,7 +63,6 @@ outRGB = min(max(outRGB,0),1);
 end
 
 function inside = pointInTri(X, Y, vx, vy)
-% Barycentrisk point-in-triangle test (snabb, ingen toolbox)
 x1=vx(1); y1=vy(1);
 x2=vx(2); y2=vy(2);
 x3=vx(3); y3=vy(3);
