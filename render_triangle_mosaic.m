@@ -1,13 +1,13 @@
 
 function [outRGB, idxMap] = render_triangle_mosaic(Ilab, paletteLab, side)
-[H,W,~] = size(Ilab);
-outRGB = zeros(H,W,3);
-idxMap = zeros(H,W);
+[height,width,~] = size(Ilab);
+outRGB = zeros(height,width,3);
+idxMap = zeros(height,width);
 
 h  = side*sqrt(3)/2;
 dx = side/2;
-nY = ceil(H/h);
-nX = ceil(W/dx);
+nY = ceil(height/h);
+nX = ceil(width/dx);
 
 paletteRGB = lab2rgb(paletteLab);
 
@@ -29,7 +29,7 @@ for iy = 1:nY
         cx = round(mean(vx));
         cy = round(mean(vy));
 
-        if cx < 1 || cx > W || cy < 1 || cy > H
+        if cx < 1 || cx > width || cy < 1 || cy > height
             continue;
         end
 
@@ -42,8 +42,8 @@ for iy = 1:nY
         [~, idx] = min(dE2);
 
         % Rita triangeln genom att fylla en bounding box och testa barycentriskt
-        xmin = max(1, floor(min(vx))); xmax = min(W, ceil(max(vx)));
-        ymin = max(1, floor(min(vy))); ymax = min(H, ceil(max(vy)));
+        xmin = max(1, floor(min(vx))); xmax = min(width, ceil(max(vx)));
+        ymin = max(1, floor(min(vy))); ymax = min(height, ceil(max(vy)));
 
         [Xg,Yg] = meshgrid(xmin:xmax, ymin:ymax);
         mask = pointInTri(Xg, Yg, vx, vy);
