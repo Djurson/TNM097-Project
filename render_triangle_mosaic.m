@@ -9,7 +9,7 @@ dx = side/2;
 nY = ceil(H/h);
 nX = ceil(W/dx);
 
-paletteRGB = lab2rgb_safe(paletteLab);
+paletteRGB = lab2rgb(paletteLab);
 
 for iy = 1:nY
     y0 = (iy-1)*h;

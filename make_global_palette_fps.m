@@ -4,7 +4,7 @@ function paletteLab = make_global_palette_fps(N, poolSize, seed)
 
 rng(seed);
 RGB = rand(poolSize,3);
-LAB = rgb2lab_safe(RGB);
+LAB = rgb2lab(RGB);
 
 % Start: slumpad punkt
 paletteLab = LAB(randi(poolSize),:);
