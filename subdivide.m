@@ -29,6 +29,7 @@ function triangles = subdivide(triangles, L_channel, minSize, detailThreshold)
         if xmin > xmax || ymin > ymax
             detail = 0;
         else
+            % Calculate the difference in L level
             patch  = L_channel(ymin:ymax, xmin:xmax);
             detail = max(patch(:)) - min(patch(:));
         end

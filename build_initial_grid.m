@@ -5,7 +5,7 @@ function triangles = build_initial_grid(maxSize, height, width)
 
     % Calculate the number of cells in the x and y direction
     nCellsY = ceil(height / cellH);
-    nCellsX = ceil(width  / dx);
+    nCellsX = ceil(width  / dx) + 1;
     n = nCellsY * nCellsX;
     
     % Create space for base triangles
@@ -16,7 +16,7 @@ function triangles = build_initial_grid(maxSize, height, width)
     for iy = 1:nCellsY
         y0 = (iy - 1) * cellH;
         for ix = 1:nCellsX
-            x0 = (ix - 1) * dx;
+            x0 = (ix - 2) * dx;
             k  = k + 1;
             up = mod(ix + iy, 2) == 0;
             vx(k, :) = [x0, x0 + dx, x0 + maxSize] + 1;

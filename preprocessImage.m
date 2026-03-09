@@ -7,6 +7,7 @@ title('Original Image');
 % Rescale image
 [~,width,~] = size(img);
 if width > maxW
+    disp('Image scaled down');
     img = imresize(img, maxW/width);
 elseif width < minW
     warning("Image enlarged – quality may decrease");
