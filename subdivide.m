@@ -1,4 +1,4 @@
-function triangles = subdivide(triangles, L_channel, maxSize, minSize, detailThreshold, height, width)
+function triangles = subdivide(triangles, L_channel, maxSize, minSize, detailThreshold)
     [imgHeight, imgWidth] = size(L_channel);
     maxQueue = 500000;
     vx = [triangles.vx; zeros(maxQueue, 3)];
