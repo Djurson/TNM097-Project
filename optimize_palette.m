@@ -16,14 +16,7 @@ function [optimizedPaletteLab, optPaletteSwatch] = optimize_palette(Ilab, fullPa
 
     % For each sampled pixel, find the closest bead in the full database
     for i = 1:numSamples
-        pixel = pixelsLab(i, :);
-        dL = fullPaletteLab(:, 1) - pixel(1);
-        da = fullPaletteLab(:, 2) - pixel(2);
-        db = fullPaletteLab(:, 3) - pixel(3);
-        
-        dE2 = dL.^2 + da.^2 + db.^2;
-        [~, minIdx] = min(dE2);
-        matchedIndices(i) = minIdx;
+        matchedIndices(i) = closest_color(pixelsLab(i,:), fullPaletteLab);
     end
 
     % Count how many pixels snapped to each bead in the palette
