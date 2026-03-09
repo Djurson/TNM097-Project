@@ -5,8 +5,8 @@ function [optimizedPaletteLab, optPaletteSwatch] = optimize_palette(Ilab, fullPa
 
     % To speed up the calculation, we randomly sample 50,000 pixels
     numPixels = height * width;
-    if numPixels > sampleQuantity % 50000
-        idx = randperm(numPixels, sampleQuantity); % 50000
+    if numPixels > sampleQuantity 
+        idx = randperm(numPixels, sampleQuantity); 
         pixelsLab = pixelsLab(idx, :);
     end
 
