@@ -8,9 +8,13 @@ function [outRGB, idxMap] = reproduce_adaptive_triangle(Ilab, paletteLab, maxSiz
     darkPaletteRGB = paletteRGB * coverage_ratio;
     darkPaletteLab = rgb2lab(darkPaletteRGB);
 
+    % Create the base triangle grid
     triangles = build_initial_grid(maxSize, height, width);
-    triangles = subdivide(triangles, L_channel, maxSize, minSize, detailThreshold);
 
+    % Subdivide the triangle grid
+    triangles = subdivide(triangles, L_channel, minSize, detailThreshold);
+
+    % Renders the final grid of triangles
     [outRGB, idxMap] = render(triangles, Ilab, darkPaletteLab, paletteRGB, outRGB, idxMap, height, width);
 
     outRGB = min(max(outRGB, 0), 1);

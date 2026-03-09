@@ -3,6 +3,7 @@ function [outRGB, idxMap] = render(triangles, Ilab, searchPaletteLab, drawPalett
         tvx = triangles.vx(i, :);
         tvy = triangles.vy(i, :);
 
+        % Bounding box for the specific triangle
         xmin = max(1, floor(min(tvx))); xmax = min(width,  ceil(max(tvx)));
         ymin = max(1, floor(min(tvy))); ymax = min(height, ceil(max(tvy)));
 
@@ -10,6 +11,8 @@ function [outRGB, idxMap] = render(triangles, Ilab, searchPaletteLab, drawPalett
             continue;
         end
 
+
+        % Generates a local meshgrid for the triangle
         [Xg, Yg] = meshgrid(xmin:xmax, ymin:ymax);
         mask = point_in_tri(Xg, Yg, tvx, tvy);
 
@@ -18,6 +21,8 @@ function [outRGB, idxMap] = render(triangles, Ilab, searchPaletteLab, drawPalett
             continue;
         end
 
+        % Gets the color values of the bounding box & calculates a mean
+        % Color value for the box
         boxL = Ilab(ymin:ymax, xmin:xmax, 1);
         boxA = Ilab(ymin:ymax, xmin:xmax, 2);
         boxB = Ilab(ymin:ymax, xmin:xmax, 3);
@@ -25,10 +30,13 @@ function [outRGB, idxMap] = render(triangles, Ilab, searchPaletteLab, drawPalett
         meanL = mean(boxL(mask));
         meanA = mean(boxA(mask));
         meanB = mean(boxB(mask));
+
         meanColor = [meanL, meanA, meanB];
 
+        % Finds the closest color to the mean color in the color palette
         idx = closest_color(meanColor, searchPaletteLab);
 
+        % Applies the color that is the closest to the out pixels
         for c = 1:3
             tmp = outRGB(ymin:ymax, xmin:xmax, c);
             tmp(mask) = drawPaletteRGB(idx, c);

@@ -1,11 +1,17 @@
 function triangles = build_initial_grid(maxSize, height, width)
+    % Calculate the triangle height based the the maxSize
     cellH = maxSize * sqrt(3) / 2;
     dx    = maxSize / 2;
+
+    % Calculate the number of cells in the x and y direction
     nCellsY = ceil(height / cellH);
     nCellsX = ceil(width  / dx);
     n = nCellsY * nCellsX;
+    
+    % Create space for base triangles
     vx = zeros(n, 3);
     vy = zeros(n, 3);
+    
     k  = 0;
     for iy = 1:nCellsY
         y0 = (iy - 1) * cellH;
