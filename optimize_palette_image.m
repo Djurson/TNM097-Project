@@ -1,6 +1,4 @@
-function [optimizedPaletteLab, optPaletteSwatch] = optimize_palette_image(Ilab, fullPaletteLab, numOptimizedColors)
-
-    coverage_ratio = 0.8;
+function [optimizedPaletteLab, optPaletteSwatch] = optimize_palette_image(Ilab, fullPaletteLab, numOptimizedColors, coverage_ratio)
     sampleQuantity = 50000;
 
     [height, width, ~] = size(Ilab);
