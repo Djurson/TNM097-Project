@@ -14,6 +14,14 @@ function [outRGB, idxMap] = reproduce_adaptive_triangle(Ilab, paletteLab, maxSiz
     % Subdivide the triangle grid
     triangles = subdivide(triangles, L_channel, minSize, detailThreshold);
 
+    figure;
+    imshow(L_channel, []); % Visar svart-vita originalbilden
+    hold on;
+    % Ritar alla trianglar med röda linjer och genomskinlig fyllning
+    patch('XData', triangles.vx', 'YData', triangles.vy', 'FaceColor', 'none', 'EdgeColor', 'r', 'LineWidth', 0.5);
+    %title('Preview: Adaptive Triangle Grid');
+    hold off;
+
     % Renders the final grid of triangles
     [outRGB, idxMap] = render(triangles, Ilab, darkPaletteLab, paletteRGB, outRGB, idxMap, height, width);
 

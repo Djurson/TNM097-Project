@@ -13,7 +13,8 @@ function [paletteLab, paletteImage] = make_rainbow_palette(numColors, numShades)
     
     % Top half: vary Saturation from 0 (white/light) to 1 (pure color)
     % Bottom half: Saturation stays at 1
-    S = repmat(min(1, 2 * y), 1, numColors);
+    S = repmat(1 - (2*y - 1).^2, 1, numColors);
+    % S = repmat(min(1, 2 * y), 1, numColors);
     
     % Top half: Value stays at 1
     % Bottom half: vary Value from 1 (pure color) to 0 (black/dark)
