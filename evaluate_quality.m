@@ -12,12 +12,12 @@ function [ssim_val, psnr_val, mean_scielab_error] = evaluate_quality(originalRGB
     orig_XYZ = rgb2xyz(originalRGB);
     mosaic_XYZ = rgb2xyz(mosaicRGB);
 
-    ppi = 224; d = 20; % ppi macbook m4
+    ppi = 81; d = 20; % ppi macbook m4
     sampPerDegree = ppi*d*tan(pi/180);
 
-    wp = whitepoint('d65'); 
+    %wp = whitepoint('d65'); 
 
-    errorMap = scielab(sampPerDegree, orig_XYZ, mosaic_XYZ, wp, 'xyz');
+    errorMap = scielab(sampPerDegree, orig_XYZ, mosaic_XYZ, [65.05, 100, 108.9], 'xyz');
 
     mean_scielab_error = mean(errorMap(:));
     

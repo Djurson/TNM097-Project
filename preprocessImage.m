@@ -1,22 +1,15 @@
-function preProcessedImg = preprocessImage(img, minW, maxW, Wout)
+function preProcessedImg = preprocessImage(img, minW, Wout)
 
 figure;
 imshow(img);
 title('Original Image');
 
-% Rescale image
-[~,width,~] = size(img);
-if width > maxW
-    disp('Image scaled down');
-    img = imresize(img, maxW/width);
-elseif width < minW
-    warning("Image enlarged – quality may decrease");
-    img = imresize(img, minW/width);
-end
-
 % Set final output width
 [height,width,~] = size(img);
 if width ~= Wout
+    if width < minW
+        warning("Image scaled up, quality may decrease");
+    end
     newH = round(height * (Wout / width));
     img = imresize(img, [newH Wout]);
 end
